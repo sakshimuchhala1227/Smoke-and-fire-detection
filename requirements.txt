@@ -2,8 +2,3 @@ ultralytics
 opencv-python
 roboflow
 
-# 8s1 contain first 5 epochs 
-# 8s122 conatin next 5 epochs= 10
-# 8s_1  next 2 = 12
-# 8s_12 next 7 = 19
-# use best.pt from F:\fire_smoke_detection\runs\detect\fire_smoke_yolov8s_12\weights\best.pt
