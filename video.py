@@ -1,3 +1,4 @@
+# final script 
 import cv2
 import os
 from ultralytics import YOLO
@@ -6,7 +7,7 @@ from ultralytics import YOLO
 model = YOLO(r"F:\fire_smoke_detection\runs\detect\fire_smoke_yolov8s_12\weights\best.pt")
 
 # Input can be a single video or a folder of videos
-input_path = r"F:\fire_smoke_detection\input\fire.mp4" # Change this to video or folder path
+input_path = r"F:\fire_smoke_detection\input\ethanol_truck.mp4" # Change this to video or folder path
 output_folder = r"F:\fire_smoke_detection\output"
 
 # Create output folder if it doesn't exist
