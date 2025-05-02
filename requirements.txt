@@ -1,4 +1,6 @@
 ultralytics
 opencv-python
 roboflow
-
+streamlit
+yt-dlp
+pytube
