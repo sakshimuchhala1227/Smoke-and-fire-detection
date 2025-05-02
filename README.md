@@ -15,7 +15,7 @@ To overcome this, our system provides a video-based smoke and fire detection mec
 * 🧠 Fine-tuned YOLOv8s model for accurate object detection
 
 ## Demo Output
-https://github.com/user-attachments/assets/4e96a7b3-6e2f-42d5-b719-a11fad248f68
+https://github.com/user-attachments/assets/4e3e94ca-bc82-4efb-a775-9f62fc8b8eaa
 
 ## Model and Dataset
 
