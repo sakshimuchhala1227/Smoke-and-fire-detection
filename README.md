@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smoke and Fire Detection Project</title>
+    
 </head>
 <body>
 
@@ -23,7 +23,9 @@
 </ul>
 
 <h2>Demo Output</h2>
-<p><a href="https://github.com/sakshimuchhala1227/Smoke-and-fire-detection/blob/main/output/out_vehicle_fire.mp4">Demo Video</a></p>
+<video width="640" height="360" controls>
+  <source src="https://github.com/sakshimuchhala1227/Smoke-and-fire-detection/blob/main/output/out_vehicle_fire.mp4?raw=true" type="video/mp4">
+</video>
 
 <h2>Model and Dataset</h2>
 <p>This project uses a YOLOv8 model fine-tuned on a custom smoke and fire dataset. The dataset was collected and labeled using Roboflow.</p>
