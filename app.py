@@ -5,6 +5,7 @@ import tempfile
 import subprocess
 import uuid
 from ultralytics import YOLO
+import yt_dlp
 
 # Load YOLO model
 model = YOLO(r"F:\fire_smoke_detection\runs\detect\fire_smoke_yolov8s_12\weights\best.pt")
@@ -12,7 +13,7 @@ model = YOLO(r"F:\fire_smoke_detection\runs\detect\fire_smoke_yolov8s_12\weights
 # Streamlit Interface
 st.title("Fire and Smoke Detection in Videos")
 st.write("Upload a video file or provide a YouTube URL to detect fire and smoke.")
-
+video_path = None 
 # Function to download YouTube video using yt-dlp
 def download_youtube_video(url):
     try:
@@ -20,49 +21,28 @@ def download_youtube_video(url):
         unique_filename = f"{uuid.uuid4()}.mp4"  # Always download as .mp4 for compatibility
         output_path = os.path.join(temp_dir, unique_filename)
 
-        # yt-dlp command to download video in .mp4 format
-        command = [
-            "yt-dlp",
-            "-f", "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
-            "-o", output_path,
-            url
-        ]
+        # yt-dlp options to download the best available format in a single file
+        ydl_opts = {
+            'outtmpl': output_path,  # Specify output file path
+            'format': 'best',         # Download best quality video with both audio and video in a single file
+            'quiet': True             # Run quietly without unnecessary logs
+        }
 
-        # Running the yt-dlp command
-        subprocess.run(command, check=True)
+        # Running yt-dlp to download the video
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([url])
+
         return output_path
-    except subprocess.CalledProcessError as e:
+    except Exception as e:
         st.error(f"yt-dlp failed to download the video: {e}")
         return None
 
-video_path = None  
+ 
 
 # Upload video
 input_video = st.file_uploader("Upload a video", type=["mp4", "avi", "mov", "mkv", "webm", "wmv"])
 youtube_url = st.text_input("Or enter a YouTube URL:")
 
-# Process and display video
-if input_video is not None:
-    stframe = st.empty()
-    # Save uploaded video to a temporary file
-    temp_file_path = tempfile.NamedTemporaryFile(delete=False, suffix=".mp4")
-    with open(temp_file_path.name, "wb") as f:
-        f.write(input_video.read())
-
-    video_path = temp_file_path.name
-    st.write(f"Processing video: {video_path}")
-
-elif youtube_url:
-    video_path = download_youtube_video(youtube_url)
-    if video_path:
-        st.write(f"Downloaded video from YouTube: {video_path}")
-    else:
-        st.error("Failed to download video.")
-
-else:
-    st.warning("Please upload a video or provide a YouTube URL.")
-
-# Function to process video and display with bounding boxes
 def process_and_display(video_path):
     cap = cv2.VideoCapture(video_path)
     fps = cap.get(cv2.CAP_PROP_FPS) or 25
@@ -101,8 +81,25 @@ def process_and_display(video_path):
 
     cap.release()
 
+# Process and display video
+if input_video is not None:
+    stframe = st.empty()
+    # Save uploaded video to a temporary file
+    temp_file_path = tempfile.NamedTemporaryFile(delete=False, suffix=".mp4")
+    with open(temp_file_path.name, "wb") as f:
+        f.write(input_video.read())
 
-
-# Process and display the video if a valid path is available
-if video_path:
+    video_path = temp_file_path.name
+    st.write(f"Processing video: {video_path}")
     process_and_display(video_path)
+
+elif youtube_url:
+    video_path = download_youtube_video(youtube_url)
+    if video_path:
+        st.write(f"Downloaded video from YouTube: {video_path}")
+        process_and_display(video_path)
+    else:
+        st.error("Failed to download video.")
+
+else:
+    st.warning("Please upload a video or provide a YouTube URL.")
