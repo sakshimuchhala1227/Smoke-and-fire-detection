@@ -23,7 +23,7 @@
 </ul>
 
 <h2>Demo Output</h2>
-https://github.com/user-attachments/assets/d003febc-ba71-4bb7-8960-07820e14220a
+https://github.com/user-attachments/assets/8f26b648-312e-4525-a49d-db33a9cf475b
 
 <h2>Model and Dataset</h2>
 <p>This project uses a YOLOv8 model fine-tuned on a custom smoke and fire dataset. The dataset was collected and labeled using Roboflow.</p>
