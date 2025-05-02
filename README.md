@@ -24,7 +24,7 @@
 
 <h2>Demo Output</h2>
 <video width="640" height="360" controls>
-  <source src="https://github.com/sakshimuchhala1227/Smoke-and-fire-detection/blob/main/output/out_vehicle_fire.mp4?raw=true" type="video/mp4">
+  <source src="https://github.com/user-attachments/assets/5654d545-6b42-45a0-8e88-02f843442630" type="video/mp4">
 </video>
 
 <h2>Model and Dataset</h2>
